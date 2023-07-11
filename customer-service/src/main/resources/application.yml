@@ -1,0 +1,38 @@
+server:
+  port: 8080  
+
+spring:
+  application:
+    name: customer-service
+  liquibase:
+    enabled: true
+    change-log: classpath:db.changelog/changelog-master.xml
+  datasource:
+    url: jdbc:mariadb://localhost:3307/customer
+    username: root
+    password: 123456
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    generate-ddl: ${JPA_GENERATE_DDL:true}
+    hibernate:
+      ddl-auto: ${JPA_DDL_AUTO:none}
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: false
+        id:
+          new_generator_mappings: false
+        types:
+          print:
+            banner: false
+    show-sql: ${JPA_SHOW_SQL:false}
+  h2:
+    console:
+      enabled: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  kafka:
+    bootstrap-servers: localhost:9092
